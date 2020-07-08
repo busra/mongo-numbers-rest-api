@@ -1,6 +1,6 @@
 package io.github.busra.mongo.numbers.restapi.controller;
 
-import io.github.busra.mongo.numbers.restapi.controller.model.StoredNumberRequest;
+import io.github.busra.mongo.numbers.restapi.controller.model.StoreNumberRequest;
 import io.github.busra.mongo.numbers.restapi.domain.StoredNumber;
 import io.github.busra.mongo.numbers.restapi.service.StoredNumberService;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +19,8 @@ public class StoredNumberController {
     }
 
     @PostMapping
-    public void saveStoredNumber(@Valid @RequestBody StoredNumberRequest storedNumberRequest) {
-        storedNumberService.saveStoredNumber(storedNumberRequest);
+    public void storeNumber(@Valid @RequestBody StoreNumberRequest storeNumberRequest) {
+        storedNumberService.storeNumber(storeNumberRequest);
     }
 
     @GetMapping

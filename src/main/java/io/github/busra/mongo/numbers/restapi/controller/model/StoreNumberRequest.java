@@ -2,7 +2,7 @@ package io.github.busra.mongo.numbers.restapi.controller.model;
 
 import javax.validation.constraints.NotNull;
 
-public class StoredNumberRequest {
+public class StoreNumberRequest {
 
     @NotNull
     private Integer value;

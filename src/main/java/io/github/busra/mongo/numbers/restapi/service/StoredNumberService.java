@@ -1,6 +1,6 @@
 package io.github.busra.mongo.numbers.restapi.service;
 
-import io.github.busra.mongo.numbers.restapi.controller.model.StoredNumberRequest;
+import io.github.busra.mongo.numbers.restapi.controller.model.StoreNumberRequest;
 import io.github.busra.mongo.numbers.restapi.domain.StoredNumber;
 import io.github.busra.mongo.numbers.restapi.repository.StoredNumberDao;
 import io.github.busra.mongo.numbers.restapi.service.error.DuplicateValueFoundException;
@@ -20,18 +20,18 @@ public class StoredNumberService {
         this.storedNumberDao = storedNumberDao;
     }
 
-    public void saveStoredNumber(StoredNumberRequest numberRequest) {
-        if (storedNumberDao.existsByValue(numberRequest.getValue())) {
-            throw new DuplicateValueFoundException("Value must be unique: " + numberRequest.getValue());
+    public void storeNumber(StoreNumberRequest storeNumberRequest) {
+        if (storedNumberDao.existsByValue(storeNumberRequest.getValue())) {
+            throw new DuplicateValueFoundException("Value must be unique: " + storeNumberRequest.getValue());
         }
 
-        storedNumberDao.save(mapStoredNumberEntity(numberRequest));
+        storedNumberDao.save(mapStoredNumberEntity(storeNumberRequest));
     }
 
-    private StoredNumber mapStoredNumberEntity(StoredNumberRequest numberRequest) {
+    private StoredNumber mapStoredNumberEntity(StoreNumberRequest storeNumberRequest) {
         StoredNumber storedNumber = new StoredNumber();
 
-        storedNumber.setValue(numberRequest.getValue());
+        storedNumber.setValue(storeNumberRequest.getValue());
         storedNumber.setInsertDate(new Date());
 
         return storedNumber;
