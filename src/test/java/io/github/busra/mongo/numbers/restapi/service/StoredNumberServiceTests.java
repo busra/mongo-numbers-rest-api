@@ -4,6 +4,7 @@ import io.github.busra.mongo.numbers.restapi.controller.model.StoreNumberRequest
 import io.github.busra.mongo.numbers.restapi.domain.StoredNumber;
 import io.github.busra.mongo.numbers.restapi.repository.StoredNumberDao;
 import io.github.busra.mongo.numbers.restapi.service.error.DuplicateValueFoundException;
+import io.github.busra.mongo.numbers.restapi.service.error.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -87,9 +88,26 @@ class StoredNumberServiceTests {
 
     @Test
     void shouldDeleteStoredNumberByValue() {
+        when(storedNumberDao.existsByValue(25)).thenReturn(true);
+
         storedNumberService.deleteStoredNumberByValue(25);
 
+        verify(storedNumberDao).existsByValue(25);
+
         verify(storedNumberDao).deleteByValue(25);
+
+        verifyNoMoreInteractions(storedNumberDao);
+    }
+
+    @Test
+    void shouldNotDeleteStoredNumberByValueWhenNotExists() {
+        when(storedNumberDao.existsByValue(25)).thenReturn(false);
+
+        assertThrows(NotFoundException.class, () -> {
+            storedNumberService.deleteStoredNumberByValue(25);
+        });
+
+        verify(storedNumberDao).existsByValue(25);
 
         verifyNoMoreInteractions(storedNumberDao);
     }

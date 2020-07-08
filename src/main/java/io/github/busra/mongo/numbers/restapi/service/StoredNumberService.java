@@ -42,6 +42,10 @@ public class StoredNumberService {
     }
 
     public void deleteStoredNumberByValue(int value) {
+        if (!storedNumberDao.existsByValue(value)) {
+            throw new NotFoundException("No stored number found for value: " + value);
+        }
+
         storedNumberDao.deleteByValue(value);
     }
 
