@@ -31,7 +31,7 @@ public class StoredNumberController {
 
     @DeleteMapping("/{value}")
     public void deleteStoredNumber(@PathVariable int value) {
-        storedNumberService.deleteStoredNumber(value);
+        storedNumberService.deleteStoredNumberByValue(value);
     }
 
     @GetMapping("/minimum")

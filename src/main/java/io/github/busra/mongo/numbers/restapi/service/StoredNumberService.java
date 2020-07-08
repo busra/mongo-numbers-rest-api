@@ -41,7 +41,7 @@ public class StoredNumberService {
         return storedNumberDao.findAll(value, isOrderAscending);
     }
 
-    public void deleteStoredNumber(int value) {
+    public void deleteStoredNumberByValue(int value) {
         storedNumberDao.deleteByValue(value);
     }
 
