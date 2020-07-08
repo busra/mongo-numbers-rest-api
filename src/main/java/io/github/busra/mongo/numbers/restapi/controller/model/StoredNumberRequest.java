@@ -1,7 +1,10 @@
 package io.github.busra.mongo.numbers.restapi.controller.model;
 
-public class NumberRequest {
+import javax.validation.constraints.NotNull;
 
+public class StoredNumberRequest {
+
+    @NotNull
     private Integer value;
 
     public Integer getValue() {
